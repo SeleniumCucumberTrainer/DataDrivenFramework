@@ -10,6 +10,7 @@ import org.testng.annotations.Test;
 
 import com.aventstack.extentreports.Status;
 
+import pages.LoginPage;
 import testCore.TestCore;
 
 public class GmailLogin extends TestCore{
@@ -19,14 +20,24 @@ public class GmailLogin extends TestCore{
 	@Test(priority=1)
 	public void doLogin() throws IOException{
 		 
+		
+		  
 	    
 	        driver.findElement(By.xpath(Object.getProperty("emailId"))).sendKeys("akhileshg50@gmail.com");
 	        
+	        log.debug("entering email Id");
+	        
 	        driver.findElement(By.xpath(Object.getProperty("nextButton"))).click();
+	        
+	        log.debug("Clicking on next button");
 	        
 	        driver.findElement(By.xpath(Object.getProperty("pass"))).sendKeys("akhileshg50");
 	        
+	        log.debug("Entering password");
+	        
 	        driver.findElement(By.xpath(Object.getProperty("nextButton"))).click();
+	        
+	        log.debug("Clicking on Login");
 	        
 	        try{
 	       
@@ -35,12 +46,16 @@ public class GmailLogin extends TestCore{
 	        
 	        logger.log(Status.PASS, "Test is passes");
 	        
+	        log.debug("Test case pass");
+	        
 	        }
 	        catch(Exception t){
 	        	
 	        	logger.addScreenCaptureFromPath("path");
 	        	
 	        	 logger.log(Status.FAIL, "Test is failed");
+	        	 
+	        	 log.debug("Test case failed");
 	        	
 	        }
 	        
@@ -51,7 +66,7 @@ public class GmailLogin extends TestCore{
 	       
 	}
 	
-	@Test(priority=1)
+	//@Test(priority=1)
 	public void doTitleTest() throws IOException{
 		 
 	    

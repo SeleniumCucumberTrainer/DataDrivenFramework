@@ -1,0 +1,9 @@
+01/02/2020 23:32:43 devpinoyLogger Opening firefox
+01/02/2020 23:32:44 devpinoyLogger Maximising firefox browser
+01/02/2020 23:32:49 devpinoyLogger Opening Application -->http://www.gmail.com
+01/02/2020 23:32:50 devpinoyLogger entering email Id
+01/02/2020 23:32:50 devpinoyLogger Clicking on next button
+01/02/2020 23:32:52 devpinoyLogger Entering password
+01/02/2020 23:32:52 devpinoyLogger Clicking on Login
+01/02/2020 23:33:12 devpinoyLogger Test case failed
+01/02/2020 23:33:14 devpinoyLogger Closing browser

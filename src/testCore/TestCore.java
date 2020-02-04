@@ -9,8 +9,12 @@ import java.util.Date;
 import java.util.Properties;
 import java.util.concurrent.TimeUnit;
 
+import org.apache.log4j.Logger;
+import org.apache.log4j.PropertyConfigurator;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 
@@ -26,6 +30,8 @@ public class TestCore {
 	public WebDriver driver;
 	public utility.Xls_Reader excel;
 	
+	public Logger log ;
+	
 	public ExtentTest logger;
 	public ExtentReports extent;
 	
@@ -36,7 +42,12 @@ public class TestCore {
 	@BeforeTest
 	public void init() throws IOException{
 		
+		
         String path = System.getProperty("user.dir");
+        
+		PropertyConfigurator.configure(path+"\\log4j.properties");
+		
+		log = Logger.getLogger("devpinoyLogger");
 		
 		System.out.println(path);
 		
@@ -62,16 +73,41 @@ public class TestCore {
 		
      excel= new Xls_Reader(path+"\\Data\\testData.xlsx");
      
+     if(config.getProperty("browser").equals("firefox")){
+     
      System.setProperty("webdriver.gecko.driver", "C:\\Jar\\driver\\geckodriver.exe");
 	 
 	 driver = new FirefoxDriver();
 	 
+     }else if(config.getProperty("browser").equals("chrome")){
+         
+         System.setProperty("webdriver.chrome.driver", "C:\\Jar\\driver\\chromedriver.exe");
+    	 
+    	 driver = new ChromeDriver();
+    	 
+         }
+       else if(config.getProperty("browser").equals("ie")){
+         
+         System.setProperty("webdriver.ie.driver", "C:\\Jar\\driver\\IEDriverServer.exe");
+    	 
+    	 driver = new InternetExplorerDriver();
+    	 
+         }
+	 
+	 log.debug("Opening firefox");
+	 
 	 driver.manage().window().maximize();
+	 
+	 log.debug("Maximising firefox browser");
+	 
      driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
      
      String gmailUrl = config.getProperty("url");
      
+     
      driver.get(gmailUrl);
+     
+     log.debug("Opening Application -->"+gmailUrl);
      
 	}
 	
@@ -80,7 +116,9 @@ public class TestCore {
 		
 		extent.flush();
 		
-		//driver.quit();
+		driver.quit();
+		
+		log.debug("Closing browser");
 		
 	}
 
